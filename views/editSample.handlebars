@@ -1,0 +1,793 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script >
+var sample = "{{invData}}";
+
+sample = sample.replace(/&quot;/g,'"');
+
+uniqueSample=JSON.parse(sample);
+//Default Sample type selected
+function callTabFunction(sampleTab) {
+  document.getElementById('sampleType').value = sampleTab;
+}
+function selectAppropriateTab(sampleTab) {
+  var tab = document.getElementById(sampleTab+"Tab");
+  var tabContent = document.getElementById(sampleTab);
+  tabContent.className = "tab-pane fade in active";
+  tab.className="active";
+}
+function updateBank() {
+  alert("The form was successfully submitted");
+}
+
+function viewProtein() {
+    var x = document.getElementById('protein1Div');
+    x.style.display='block';
+    var y = document.getElementById('DNA1Div');
+    y.style.display='none';
+}
+function viewDNA() {
+    var x = document.getElementById('DNA1Div');
+    x.style.display='block';
+    var y = document.getElementById('protein1Div');
+    y.style.display='none';
+}
+
+function OnSelectedIndexChange(){
+if (document.getElementById('Allele1').value == "Protein"){
+  viewProtein();
+}
+if (document.getElementById('Allele1').value == "DNA"){
+  viewDNA();
+}
+}
+
+function OnSelectedIndexChange2(){
+if (document.getElementById('Allele2').value == "Protein"){
+  viewProtein2();
+}
+if (document.getElementById('Allele2').value == "DNA"){
+  viewDNA2();
+}
+}
+function viewProtein2() {
+    var x = document.getElementById('protein2Div');
+    x.style.display='block';
+    var y = document.getElementById('DNA2Div');
+    y.style.display='none';
+}
+function viewDNA2() {
+    var x = document.getElementById('DNA2Div');
+    x.style.display='block';
+    var y = document.getElementById('protein2Div');
+    y.style.display='none';
+}
+
+</script>
+<style>
+
+  #bottom {
+    width:100%;
+    height:150px;
+  }
+   #left {
+     width: 50%;
+     height:800px;
+     float:left;
+   }
+   #right {
+     height:800px;
+     margin-left: 50%;
+     width:50%;
+     /* Change this to whatever the width of your left column is*/
+   }
+   .clear {
+     clear: both;
+   }
+   #leftLeft {
+     width: 30%;
+     float: left;
+     margin-left:30%;
+     font-size: 14px;
+   }
+
+   #leftRight {
+     margin-left:60%;
+     width: 40%;
+   }
+   #leftLeftR {
+     width: 30%;
+     float: left;
+     margin-left:5%;
+     font-size: 14px;
+   }
+   #leftRightR {
+     margin-left:40%;
+     width: 40%;
+   }
+   #row{
+     margin-top: 20px;
+   }
+
+ </style>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-select.min.css">
+<script src="../js/bootstrap-select.min.js"></script>
+
+<form method="post" action="/sample/updateSample" class="form-horizontal">
+  <div class="box">
+ <div id = "masterContainer" >
+     <div class="text-center">
+     <h1 id="header">Edit Sample</h1>
+     </div>
+     </div>
+ <div id="left" class="leftBox">
+   <input type="hidden" id="_repassedID" name="_repassedID" />
+   <div id="row">
+     <div id="leftLeft">
+      <label for="inputEmail3" class="" title="placeholder about this title #TODO">Diagnosis*</label>
+     </div>
+     <div id="leftRight" >
+       <select class="selectpicker" name="diagnosis" id="diagnosis"  required>
+         <option value=""></option>
+         <option role="presentation" value="CTD: Carnitine transporter defect">CTD: Carnitine transporter defect</option>
+         <option role="presentation" value="CPT1: Carnitine palmitoyltransferase defect">CPT1: Carnitine palmitoyltransferase defect</option>
+         <option role="presentation" value="CACT: Carnitine acylcarnitine trasferase defect">CACT: Carnitine acylcarnitine trasferase defect</option>
+         <option role="presentation" value="VLCAD: Very long chain acyl-CoA dehydrogenase deficiency">VLCAD: Very long chain acyl-CoA dehydrogenase deficiency</option>
+         <option role="presentation" value="MCAD: Medium chain acyl-CoA dehydrogenase deficiency">MCAD: Medium chain acyl-CoA dehydrogenase deficiency</option>
+         <option role="presentation" value="SCAD: Short chain acyl-CoA dehydrogenase deficiency">SCAD: Short chain acyl-CoA dehydrogenase deficiency</option>
+         <option role="presentation" value="ACAD: Acyl-CoA dehydrogenase 9 deficiency">ACAD: Acyl-CoA dehydrogenase 9 deficiency</option>
+         <option role="presentation" value="LCHAD: Long chain 3-hydroxyacyl-CoA dehydrogenase deficiency, isolated">LCHAD: Long chain 3-hydroxyacyl-CoA dehydrogenase deficiency, isolated</option>
+         <option role="presentation" value="MTP: Mitochondrial trifunctional protein deficiency">MTP: Mitochondrial trifunctional protein deficiency</option>
+         <option role="presentation" value="MCHAD: Medium chain 3-hydroxyacyl-CoA dehydrogenase deficiency">MCHAD: Medium chain 3-hydroxyacyl-CoA dehydrogenase deficiency</option>
+         <option role="presentation" value="SCHAD: Short chain 3-hydroxyacyl-CoA dehydrogenase deficiency">SCHAD: Short chain 3-hydroxyacyl-CoA dehydrogenase deficiency</option>
+         <option role="presentation" value="MKAT: Medium chain 3-ketoacyl-CoA thiolase">MKAT: Medium chain 3-ketoacyl-CoA thiolase</option>
+         <option role="presentation" value="ETF: Electron transfer flavoprotein deficiency">ETF: Electron transfer flavoprotein deficiency</option>
+         <option role="presentation" value="ETFDH: Electron flavoprotein dehydrogenase deficiency">ETFDH: Electron flavoprotein dehydrogenase deficiency</option>
+       </select>
+     </div>
+   </div>
+   <div id="row">
+     <div id="Allele1Div">
+     <div id="leftLeft">
+      <label for="inputEmail3" class="" title="placeholder about this title #TODO">Allele1</label>
+     </div>
+     <div id="leftRight" >
+       <select class="selectpicker" name="Allele1" id="Allele1" onChange="OnSelectedIndexChange()" >
+         <option value=""></option>
+           <option value="Protein">Protein</option>
+           <option value="DNA">DNA</option>
+       </select>
+     </div>
+   </div>
+   </div>
+   <div id="protein1Div" style="display:none">
+   <div id="row">
+     <div id="leftLeft">
+      <label for="inputEmail3" class="" title="placeholder about this title #TODO">Protein</label>
+     </div>
+     <div id="leftRight" >
+       <input type="text" class="form-control" name="proteinRelInfo" id="proteinRelInfo" style="width:220px" placeholder="Protein Related Information">
+     </div>
+   </div>
+   <div id="row">
+     <div id="leftLeft">
+      <label for="inputEmail3" class="" title="placeholder about this title #TODO">Protein Code</label>
+     </div>
+     <div id="leftRight" >
+       <input type="text" class="form-control" name="proteinCode" id="proteinCode" style="width:220px" placeholder="">
+     </div>
+   </div>
+   </div>
+   <div id="DNA1Div" style="display:none">
+   <div id="row">
+     <div id="leftLeft">
+      <label for="inputEmail3" class=""title="placeholder about this title #TODO">DNA</label>
+     </div>
+     <div id="leftRight" >
+       <input type="text" class="form-control" name="DNARelInfo" id="DNARelInfo" style="width:220px" placeholder="DNA Related Information">
+     </div>
+   </div>
+   <div id="row">
+     <div id="leftLeft">
+      <label for="inputEmail3" class=""title="placeholder about this title #TODO">DNA Code</label>
+     </div>
+     <div id="leftRight" >
+       <input type="text" class="form-control" name="DNACode" id="DNACode"  style="width:220px" placeholder="">
+     </div>
+   </div>
+   </div>
+ <div id="row">
+   <div id="Allele2Div">
+   <div id="leftLeft">
+    <label for="inputEmail3" class=""title="placeholder about this title #TODO">Allele2</label>
+   </div>
+   <div id="leftRight" >
+     <select class="selectpicker" id="Allele2" name="Allele2" onChange="OnSelectedIndexChange2()">
+       <option value=""></option>
+         <option value="Protein">Protein</option>
+         <option value="DNA">DNA</option>
+     </select>
+   </div>
+ </div>
+ </div>
+
+ <div id="protein2Div" style="display:none">
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class=""title="placeholder about this title #TODO">Protein</label>
+   </div>
+   <div id="leftRight" >
+     <input type="text" class="form-control" name="proteinRelInfo2" id="proteinRelInfo2" style="width:220px" placeholder="Protein Related Information">
+   </div>
+ </div>
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class=""title="placeholder about this title #TODO">Protein Code</label>
+   </div>
+   <div id="leftRight" >
+     <input type="text" class="form-control" name="proteinCode2" id="proteinCode2" style="width:220px" placeholder="">
+   </div>
+ </div>
+ </div>
+ <div id="DNA2Div" style="display:none">
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class="" title="placeholder about this title #TODO">DNA</label>
+   </div>
+   <div id="leftRight" >
+     <input type="text" class="form-control" name="DNARelInfo2" id="DNARelInfo2" style="width:220px" placeholder="DNA Related Information">
+   </div>
+ </div>
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class="" title="placeholder about this title #TODO">DNA Code</label>
+   </div>
+   <div id="leftRight" >
+     <input type="text" class="form-control" name="DNACode2" id="DNACode2"  style="width:220px" placeholder="">
+   </div>
+ </div>
+
+
+ </div>
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class="" title="placeholder about this title #TODO">Phenotype*</label>
+   </div>
+   <div id="leftRight" style="width:220px">
+     <select id="phenotypeMultiple" class="selectpicker form-control" name="phenotypeMultiple" style="width:220px" multiple required >
+       <option value=""></option>
+      <option value="Hypoglycemia">Hypoglycemia</option>
+      <option value="Rhabdomyolysis">Rhabdomyolysis</option>
+      <option value="Cardiomyopathy">Cardiomyopathy</option>
+      <option value="Cardiac arrhythmia">Cardiac arrhythmia</option>
+      <option value="Skeletal Myopathy">Skeletal Myopathy</option>
+      <option value="Hyperammonemia">Hyperammonemia</option>
+      <option value="Peripheral neuropathy">Peripheral neuropathy</option>
+      <option value="Retinopathy">Retinopathy</option>
+     </select>  </div>
+ </div>
+
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class="" title="placeholder about this title #TODO">Sample Date*</label>
+   </div>
+   <div id="leftRight" >
+     <input type="date" id="sampleDate" name="sampleDate"  style="width:220px" class="form-control" required>
+   </div>
+ </div>
+
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class=""title="placeholder about this title #TODO">Subject ID*</label>
+   </div>
+   <div id="leftRight" >
+     <input type="date" id="subjectID" name="subjectID" style="width:220px" class="form-control" required>
+   </div>
+ </div>
+
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class="" title="placeholder about this title #TODO">Age*</label>
+   </div>
+   <div id="leftRight" >
+     <div class="input-group" >
+     <input type="text" class="form-control" name="age" id="age" style="width:70px;" aria-describedby="basic-addon2">
+     <span class="input-group-addon" style="float:left;width:60px;height:34px" id="basic-addon2">years</span>
+     </div>
+     </div>
+ </div>
+
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class="" title="placeholder about this title #TODO">Sex</label>
+   </div>
+   <div id="leftRight" >
+     <div class="input-group" id="sex">
+       <div class="">
+         <div class="form-check" >
+           <label class="form-check-label">
+             <input type="radio"  class="form-check-input" name="sex" id="Male" value="Male"  >
+             Male
+           </label>
+         </div>
+         <div class="form-check">
+         <label class="form-check-label">
+             <input type="radio" class="form-check-input" name="sex" id="Female" value="Female">
+             Female
+           </label>
+         </div>
+         <div class="form-check disabled">
+         <label class="form-check-label">
+             <input type="radio" class="form-check-input" name="sex" id="Not Specified" value="Not Specified" >
+             Not Specified
+           </label>
+         </div>
+       </div>
+     </div>
+ </div>
+
+ </div>
+
+ <div id="row">
+   <div id="leftLeft">
+    <label for="inputEmail3" class="" title="placeholder about this title #TODO">Ethnic Background*</label>
+   </div>
+   <div id="leftRight" >
+     <select class="selectpicker" name="ethnicBackground" id="ethnicBackground" style="width:auto" required>
+        <option value=""></option>
+        <option value="American Indian or Alaska Native">American Indian or Alaska Native</option>
+        <option value="Asian">Asian</option>
+        <option value="Black or African American">Black or African American</option>
+        <option value="Native Hawaiian or Other Pacific Islander">Native Hawaiian or Other Pacific Islander</option>
+        <option value="White">White</option>
+      </select>
+      </div>
+ </div>
+ </div>
+   <div id="right" >
+
+     <div role="tabpanel" style="width:100%" >
+       <div id="tabContiner" style="margin-top:30px">
+         <ul id="tabSelected" name="tabSelected" class="nav nav-tabs" role="" style="height:40px;margin-left:5%;">
+     <li id="CellTab" onclick="callTabFunction('Cell')" role="presentation" ><a href="#Cell" style="border-style:solid;padding-top:8px;padding-bottom:8px" data-toggle="tab" role="tab" aria-controls="tab1">Cell</a></li>
+     <li id="BloodTab" onclick="callTabFunction('Blood')"role="presentation" ><a href="#Blood" data-toggle="tab" style="border-style:solid;padding-top:8px;padding-bottom:8px" role="tab" aria-controls="tab2">Blood</a></li>
+     <li id="UrineTab" onclick="callTabFunction('Urine')" role="presentation" ><a href="#Urine" data-toggle="tab" style="border-style:solid;padding-top:8px;padding-bottom:8px" role="tab" aria-controls="tab3">Urine</a></li>
+     <li id="TissueTab" onclick="callTabFunction('Tissue')" role="presentation" ><a href="#Tissue" data-toggle="tab" style="border-style:solid;padding-top:8px;padding-bottom:8px"  role="tab" aria-controls="tab4">Tissue</a></li>
+     <input type="hidden" id="sampleType" name="sampleType" />
+     </ul>
+   </div>
+     <div id="tabContent1" class="tab-content" style="" >
+     <div role="tabpanel" class="tab-pane fade" id="Cell" >
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" class="" title="placeholder about this title #TODO">Sample Type</label>
+       </div>
+             <div id="leftRightR" >
+               <select class="selectpicker" name="cellSampleType" id="cellSampleType" >
+                 <option value=""></option>
+                 <option value="Red Blood Cells">Red Blood Cells</option>
+                 <option value="White Blood Cells">White Blood Cells</option>
+               </select>
+               </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" class=""title="placeholder about this title #TODO">Passage #</label>
+       </div>
+             <div id="leftRightR" >
+               <input type="text" class="form-control" name="passageNumberCell" style="width:220px" id="passageNumberCell" placeholder="">
+               </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" class=""title="placeholder about this title #TODO">Age at Sampling</label>
+       </div>
+             <div id="leftRightR">
+               <div class="input-group" >
+               <input type="text" class="form-control" name="ageAtSamplingCell" id="ageAtSamplingCell" style="width:70px;" aria-describedby="basic-addon2">
+               <span class="input-group-addon" style="float:left;width:60px;height:34px" id="basic-addon2">years</span>
+             </div>
+           </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3"title="placeholder about this title #TODO" >Prior Biochemical Results</label>
+       </div>
+             <div id="leftRightR" >
+               <textarea  class="form-control" name="priorBioCell" id="priorBioCell"  style="width:220px;" rows="3"></textarea>
+               </div>
+       </div>
+
+     </div>
+     <!-- End of Cell -->
+     <div role="tabpanel" class="tab-pane fade" id="Blood" >
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" class=""title="placeholder about this title #TODO">Age at Sampling</label>
+       </div>
+             <div id="leftRightR">
+               <div class="input-group" >
+               <input type="text" class="form-control" name="ageAtSamplingBlood" id="ageAtSamplingBlood" style="width:70px;" aria-describedby="basic-addon2">
+               <span class="input-group-addon" style="float:left;width:60px;height:34px" id="basic-addon2">years</span>
+             </div>
+           </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" class=""title="placeholder about this title #TODO">Nutrition</label>
+       </div>
+             <div id="leftRightR">
+               <div class="" id="nutritionBlood">
+                 <div class="form-check">
+                   <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="nutritionBlood" id="FedB" value="Fed" >
+                     Fed
+                   </label>
+                 </div>
+                 <div class="form-check">
+                 <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="nutritionBlood" id="FastB" value="Fast">
+                     Fast
+                   </label>
+                 </div>
+               </div>
+           </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" class=""title="placeholder about this title #TODO">Health</label>
+       </div>
+             <div id="leftRightR">
+               <div class="" id="healthBLood">
+                 <div class="form-check">
+                   <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="healthBLood" id="SickB" value="Sick" >
+                     Sick
+                   </label>
+                 </div>
+                 <div class="form-check">
+                 <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="healthBLood" id="WellB" value="Well">
+                     Well
+                   </label>
+                 </div>
+               </div>
+           </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" class=""title="placeholder about this title #TODO">Sample Type</label>
+       </div>
+             <div id="leftRightR">
+               <div id="sampleTypeBlood">
+                 <div class="form-check">
+                   <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="sampleTypeBlood" id="PlasmaB" value="Plasma" >
+                     Plasma
+                   </label>
+                 </div>
+                 <div class="form-check">
+                 <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="sampleTypeBlood" id="SerumB" value="Serum">
+                     Serum
+                   </label>
+                 </div>
+                 <div class="form-check">
+                 <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="sampleTypeBlood" id="Dried Blood SpotB" value="Dried Blood Spot">
+                     Dried Blood Spot
+                   </label>
+                 </div>
+               </div>
+           </div>
+       </div>
+
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" title="placeholder about this title #TODO">Prior Biochemical Results</label>
+       </div>
+             <div id="leftRightR" >
+               <textarea  class="form-control" name="priorBioBlood" id="priorBioBlood"  style="width:220px;" rows="3"></textarea>
+               </div>
+       </div>
+     </div>
+     <!-- End of Blood -->
+     <div role="tabpanel" class="tab-pane fade" id="Urine" >
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" title="placeholder about this title #TODO">Age at Sampling</label>
+       </div>
+             <div id="leftRightR" >
+               <div class="input-group" >
+               <input type="text" class="form-control" name="ageAtSamplingUrine" id="ageAtSamplingUrine" style="width:70px;" aria-describedby="basic-addon2">
+               <span class="input-group-addon" style="float:left;width:60px;height:34px" id="basic-addon2">years</span>
+             </div>
+           </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3"title="placeholder about this title #TODO" >Nutrition</label>
+       </div>
+             <div id="leftRightR" >
+               <div class="" id="nutritionUrine">
+                 <div class="form-check">
+                   <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="nutritionUrine" id="FedU" value="Fed" >
+                     Fed
+                   </label>
+                 </div>
+                 <div class="form-check">
+                 <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="nutritionUrine" id="FastU" value="Fast">
+                     Fast
+                   </label>
+                 </div>
+               </div>
+           </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3" title="placeholder about this title #TODO">Health</label>
+       </div>
+             <div id="leftRightR" >
+               <div class="" id="healthUrine">
+                 <div class="form-check">
+                   <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="healthUrine" id="SickU" value="Sick" >
+                     Sick
+                   </label>
+                 </div>
+                 <div class="form-check">
+                 <label class="form-check-label">
+                     <input type="radio" class="form-check-input" name="healthUrine" id="WellU" value="Well">
+                     Well
+                   </label>
+                 </div>
+               </div>
+           </div>
+       </div>
+       <div id="row" >
+       <div id="leftLeftR">
+        <label for="inputEmail3"title="placeholder about this title #TODO" >Prior Biochemical Results</label>
+       </div>
+             <div id="leftRightR" >
+               <textarea  class="form-control" name="priorBioUrine" id="priorBioUrine"  style="width:220px;" rows="3"></textarea>
+               </div>
+       </div>
+     </div>
+ <!-- End of urine one -->
+   <div role="tabpanel" class="tab-pane fade" id="Tissue">
+     <div id="row" >
+     <div id="leftLeftR">
+      <label for="inputEmail3" title="placeholder about this title #TODO">Sample Type</label>
+     </div>
+           <div id="leftRightR" >
+             <select class="selectpicker" name="tissueType" id="tissueType" style="width:auto" >
+              <option value=""></option>
+              <option value="Red Twitch">Red Twitch</option>
+              <option valye="White Twitch">White Twitch</option>
+            </select>
+          </div>
+     </div>
+     <div id="row" >
+     <div id="leftLeftR">
+      <label for="inputEmail3"title="placeholder about this title #TODO" >Age at Sampling</label>
+     </div>
+           <div id="leftRightR" >
+             <div class="input-group" >
+             <input type="text" class="form-control" name="ageAtSamplingTissue" id="ageAtSamplingTissue" style="width:70px;" aria-describedby="basic-addon2">
+             <span class="input-group-addon" style="float:left;width:60px;height:34px" id="basic-addon2">years</span>
+           </div>
+
+          </div>
+     </div>
+     <div id="row" >
+     <div id="leftLeftR">
+      <label for="inputEmail3" title="placeholder about this title #TODO">Tissue</label>
+     </div>
+           <div id="leftRightR" >
+             <div class="" id="tissueState">
+               <div class="form-check">
+                 <label class="form-check-label">
+                   <input type="radio" class="form-check-input" name="tissueState" id="Frozen" value="Frozen" >
+                   Frozen
+                 </label>
+               </div>
+               <div class="form-check">
+               <label class="form-check-label">
+                   <input type="radio" class="form-check-input" name="tissueState" id="Fixed" value="Fixed">
+                   Fixed
+                 </label>
+               </div>
+             </div>
+
+          </div>
+     </div>
+     <div id="row" >
+     <div id="leftLeftR">
+      <label for="inputEmail3"title="placeholder about this title #TODO">Prior Pathology or Enzyme Test</label>
+     </div>
+           <div id="leftRightR" >
+             <textarea  class="form-control" name="priorPathTissue" id="priorPathTissue"  style="width:220px;" rows="3"></textarea>
+             </div>
+     </div>
+   </div>
+ <!-- End of Tissue-->
+
+
+ </div>
+
+   </div>
+  </div>
+     <!-- right Column ends here-->
+     <div id="bottom">
+       <div class="row" >
+       <div class="checkbox" style="text-align:center">
+        <label style="width:100%;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:bold" title="placeholder about this title #TODO">
+           <input type="checkbox" name="consentForFurtherResearch" id="consentForFurtherResearch" value="Yes">
+           Consent obtained for additional research
+         </label>
+       </div>
+       </div>
+
+       <div class="row" style="margin-top:20px">
+        <div class="input-group" style="align:center; margin-left:43%" >
+         <input class="btn btn-default"  name="submit" type="submit" style="height:60px; background-color:#4276b5;color:white;font-size: 24px;" value="Update the Bank">
+        </div>
+       </div>
+       </div>
+
+ </div>
+ </div>
+
+
+
+</form>
+
+<script>
+callTabFunction(uniqueSample[0].sampleType);
+selectAppropriateTab(uniqueSample[0].sampleType);
+
+// for preloading
+if (uniqueSample[0].Allele1 == "Protein"){
+  viewProtein();
+}
+if (uniqueSample[0].Allele1 == "DNA"){
+  viewDNA();
+}
+if (uniqueSample[0].Allele2 == "Protein"){
+  viewProtein2();
+}
+if (uniqueSample[0].Allele2 == "DNA"){
+  viewDNA2();
+}
+
+ageElement=document.getElementById("diagnosis");
+ageElement.value = uniqueSample[0].diagnosis;
+
+ageElement=document.getElementById("Allele1");
+ageElement.value = uniqueSample[0].Allele1;
+
+ageElement=document.getElementById("proteinRelInfo");
+ageElement.value = uniqueSample[0].proteinRelInfo;
+
+ageElement=document.getElementById("proteinCode");
+ageElement.value = uniqueSample[0].proteinCode;
+
+ageElement=document.getElementById("DNARelInfo");
+ageElement.value = uniqueSample[0].DNARelInfo;
+
+ageElement=document.getElementById("DNACode");
+ageElement.value = uniqueSample[0].DNACode;
+
+ageElement=document.getElementById("DNARelInfo");
+ageElement.value = uniqueSample[0].DNARelInfo;
+
+ageElement=document.getElementById("proteinCode2");
+ageElement.value = uniqueSample[0].proteinCode2;
+
+ageElement=document.getElementById("Allele2");
+ageElement.value = uniqueSample[0].Allele2;
+
+ageElement=document.getElementById("DNARelInfo2");
+ageElement.value = uniqueSample[0].DNARelInfo2;
+
+ageElement=document.getElementById("subjectID");
+ageElement.value = uniqueSample[0].subjectID;
+
+ageElement=document.getElementById("subjectID");
+ageElement.value = uniqueSample[0].subjectID;
+
+ageElement=document.getElementById("DNACode2");
+ageElement.value = uniqueSample[0].DNACode2;
+ageElement=document.getElementById("phenotypeMultiple");
+if(uniqueSample[0].phenotypeMultiple != null) {
+  var phenotypeArray = uniqueSample[0].phenotypeMultiple ;
+  for (i = 0; i < ageElement.length; i++) {
+    o = ageElement.options[i];
+    if ( phenotypeArray.indexOf( o.text ) != -1 )
+    {
+      o.selected = true;
+    }
+  }
+}
+ageElement=document.getElementById("sampleDate");
+ageElement.value = uniqueSample[0].sampleDate;
+
+
+ageElement=document.getElementById("age");
+ageElement.value = uniqueSample[0].age;
+
+ageElement=document.getElementById("passageNumberCell");
+ageElement.value = uniqueSample[0].passageNumberCell;
+ageElement=document.getElementById("ageAtSamplingTissue");
+ageElement.value = uniqueSample[0].ageAtSamplingTissue;
+ageElement=document.getElementById("ageAtSamplingCell");
+ageElement.value = uniqueSample[0].ageAtSamplingCell;
+ageElement=document.getElementById("ageAtSamplingUrine");
+ageElement.value = uniqueSample[0].ageAtSamplingUrine;
+ageElement=document.getElementById("ageAtSamplingBlood");
+ageElement.value = uniqueSample[0].ageAtSamplingBlood;
+
+ageElement=document.getElementById("priorPathTissue");
+ageElement.value = uniqueSample[0].priorPathTissue;
+ageElement=document.getElementById("priorBioUrine");
+ageElement.value = uniqueSample[0].priorBioUrine;
+ageElement=document.getElementById("priorBioCell");
+ageElement.value = uniqueSample[0].priorBioCell;
+ageElement=document.getElementById("priorBioBlood");
+ageElement.value = uniqueSample[0].priorBioBlood;
+
+ageElement=document.getElementById("ethnicBackground");
+ageElement.value = uniqueSample[0].ethnicBackground;
+
+ageElement=document.getElementById("cellSampleType");
+ageElement.value = uniqueSample[0].cellSampleType;
+ageElement=document.getElementById("tissueType");
+ageElement.value = uniqueSample[0].tissueType;
+if(uniqueSample[0].nutritionBlood != null){
+  ageElement=document.getElementById(uniqueSample[0].nutritionBlood+"B");
+  ageElement.checked = true;
+}
+if(uniqueSample[0].healthBLood != null){
+  ageElement=document.getElementById(uniqueSample[0].healthBLood+"B");
+  ageElement.checked = true;
+}
+
+if(uniqueSample[0].sampleTypeBlood != null){
+  ageElement=document.getElementById(uniqueSample[0].sampleTypeBlood+"B");
+  ageElement.checked = true;
+}
+
+if(uniqueSample[0].healthUrine != null){
+  ageElement=document.getElementById(uniqueSample[0].healthUrine+"U");
+  ageElement.checked = true;
+}
+if(uniqueSample[0].nutritionUrine != null){
+  ageElement=document.getElementById(uniqueSample[0].nutritionUrine+"U");
+  ageElement.checked = true;
+}
+if(uniqueSample[0].tissueState != null){
+  ageElement=document.getElementById(uniqueSample[0].tissueState);
+  ageElement.checked = true;
+}
+
+
+if(uniqueSample[0].consentForFurtherResearch =='Yes'){
+  ageElement=document.getElementById("consentForFurtherResearch");
+  ageElement.checked = true;
+}
+
+document.getElementById("_repassedID").setAttribute("value", uniqueSample[0]._id);
+
+//
+if(uniqueSample[0].sex!= null) {
+  ageElement=document.getElementById(uniqueSample[0].sex);
+  ageElement.checked = true;
+}
+
+$(".dropdown-menu li a").click(function(){
+    var selText = $(this).text();
+    $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+});
+
+</script>

@@ -1,0 +1,376 @@
+<script >
+var sample = "{{invData}}";
+
+sample = sample.replace(/&quot;/g,'"');
+
+uniqueSample=JSON.parse(sample);
+</script>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-select.min.css">
+<script src="../js/bootstrap-select.min.js"></script>
+<style>
+   #left {
+     width: 50%;
+     float:left;
+   }
+   #right {
+     margin-left: 50%;
+     width:50%;
+     /* Change this to whatever the width of your left column is*/
+   }
+   .clear {
+     clear: both;
+   }
+   #leftLeft {
+     width: 30%;
+     float: left;
+     margin-left:30%;
+     color: grey;
+     font-size: 14px;
+   }
+
+   #leftRight {
+     margin-left:60%;
+     width: 40%;
+   }
+   #leftLeftR {
+     width: 30%;
+     float: left;
+     margin-left:5%;
+     color: grey;
+     font-size: 14px;
+   }
+   #leftRightR {
+     margin-left:40%;
+     width: 40%;
+   }
+   #row{
+     margin-top: 20px;
+   }
+
+ </style>
+<div class="box">
+<div id = "masterContainer" >
+    <div class="text-center">
+    <h1 id="header">Sample Details</h1>
+    </div>
+<div id="left">
+  <div id="row">
+    <div id="leftLeft">
+      <label id="Diagnosis" >Diagnosis</label>
+    </div>
+    <div id="leftRight" name="">
+      <label id="diagnosisValue" name="diagnosisValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="Allele1" >Allele1 Type</label>
+    </div>
+    <div id="leftRight">
+      <label id="Allele1Value"></label>
+    </div>
+  </div>
+  <div id ="Allele1Protein" style="display:none">
+  <div id="row">
+    <div id="leftLeft">
+      <label id="proteinRelInfoValue" >Protein</label>
+    </div>
+    <div id="leftRight">
+      <label id="proteinRelInfoValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="proteinCode" >Protein Code</label>
+    </div>
+    <div id="leftRight">
+      <label id="proteinCodeValue"></label>
+    </div>
+  </div>
+</div>
+<div id="Allele1DNA" style="display:none">
+  <div id="row">
+    <div id="leftLeft">
+      <label id="DNARelInfo" >DNA</label>
+    </div>
+    <div id="leftRight">
+      <label id="DNARelInfoValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="DNACode" >DNA Code</label>
+    </div>
+    <div id="leftRight">
+      <label id="DNACodeValue"></label>
+    </div>
+  </div>
+</div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="Allele2" >Allele2 Type</label>
+    </div>
+    <div id="leftRight">
+      <label id="Allele2Value"></label>
+    </div>
+  </div>
+  <div id="Allele2Protein" style="display:none">
+  <div id="row">
+    <div id="leftLeft">
+      <label id="proteinRelInfo2" >Protein</label>
+    </div>
+    <div id="leftRight">
+      <label id="proteinRelInfoValue2"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="proteinCode2" >Protein Code</label>
+    </div>
+    <div id="leftRight">
+      <label id="proteinCodeValue2"></label>
+    </div>
+  </div>
+</div>
+<div id="Allele2DNA" style="display:none">
+  <div id="row">
+    <div id="leftLeft">
+      <label id="DNARelInfo2" >DNA</label>
+    </div>
+    <div id="leftRight">
+      <label id="DNARelInfoValue2"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="DNACode2" >DNA Code</label>
+    </div>
+    <div id="leftRight">
+      <label id="DNACodeValue2"></label>
+    </div>
+  </div>
+</div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="phenotypeMultiple" >Phenotype</label>
+    </div>
+    <div id="leftRight">
+      <label id="phenotypeMultipleValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="sampleDate" >Sample Date</label>
+    </div>
+    <div id="leftRight">
+      <label id="sampleDateValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="subjectID" >Subject ID</label>
+    </div>
+    <div id="leftRight">
+      <label id="subjectIDValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="age" >Age</label>
+    </div>
+    <div id="leftRight">
+      <label id="ageValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="sex" >Sex</label>
+    </div>
+    <div id="leftRight">
+      <label id="sexValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="ethnicBackground">Ethnic Background</label>
+    </div>
+    <div id="leftRight">
+      <label id="ethnicBackgroundValue"></label>
+    </div>
+  </div>
+  <div id="row">
+    <div id="leftLeft">
+      <label id="consentForFurtherResearch" >Consent for Further Research</label>
+    </div>
+    <div id="leftRight">
+      <label id="consentForFurtherResearchValue"></label>
+    </div>
+  </div>
+</div>
+  <div id="right">
+    <div id="row" style="margin-top:25px">
+      <div id="leftLeftR">
+        <label id="sampleType">Sample Type</label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="sampleValue"></label>
+      </div>
+    </div>
+    <div id="cellSampleDiv" style="display:none">
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="cellSampleType">Cell Sample Type</label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="cellSampleTypeValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="passageNumberCell">Passage #</label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="passageNumberCellValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="ageAtSamplingCell">Age at Sampling</label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="ageAtSamplingCellValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="priorBioCell">Prior Biochemical Results</label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="priorBioCellValue"></label>
+      </div>
+    </div>
+  </div>
+    <!-- Blood Sample Starts here-->
+    <div id="bloodSampleDiv" style="display:none">
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="ageAtSamplingBlood">Age at Sampling</label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="ageAtSamplingBloodValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="nutritionBlood">Nutrition</label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="nutritionBloodValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="healthBLood">Health</label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="healthBLoodValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="sampleTypeBlood">Blood Sample Type </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="sampleTypeBloodValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="priorBioBlood">Prior Bio Chemical Results </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="priorBioBloodValue"></label>
+      </div>
+    </div>
+  </div>
+    <!-- Blood Sample ends here -->
+    <!-- Urine Sample STarts here -->
+    <div id="urineSampleDiv" style="display:none">
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="ageAtSamplingUrine">Age At Sampling </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="ageAtSamplingUrineValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="nutritionUrine">Nutrition </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="nutritionUrineValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="healthUrine">Health </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="healthUrineValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="priorBioUrine">Prior Bio Chemical Results </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="priorBioUrineValue"></label>
+      </div>
+    </div>
+  </div>
+    <!-- Urine Sample Ends here -->
+    <!-- Tissue Sample Starts here -->
+<div id="tissueSampleDiv" style="display:none">
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="tissueType">Sample Tissue Type </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="tissueTypeValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="ageAtSamplingTissue">Age at Sampling </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="ageAtSamplingTissueValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="tissueState">Tissue </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="tissueStateValue"></label>
+      </div>
+    </div>
+    <div id="row">
+      <div id="leftLeftR">
+        <label id="priorPathTissue">Prior Pathology or Enzyme Test </label>
+      </div>
+      <div id="leftRightR" name="">
+        <label id="priorPathTissueValue"></label>
+      </div>
+    </div>
+  </div>
+<!-- Tissue Sample ends here -->
+    </div>
+    <!-- right Column ends here-->
+  <div class="clear">
+  </div>
+
+</div>
+</div>
+<script src="../js/sampleDetails.js"></script>

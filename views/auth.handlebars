@@ -1,0 +1,464 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<div class="row">
+      <div class="box">
+          <div class="col-lg-12" style="padding: 45px;">
+              <hr>
+              <h2 class="intro-text text-center">Welcome!
+              </h2>
+              <hr>
+              <div class="row" style="padding-top: 30px;">
+                	<div class="col-lg-offset-2 col-lg-4">
+                  <div>
+                    {{#if errors}}
+                        {{#each errors}}
+                          <div class="alert alert-danger">{{msg}}</div>
+                        {{/each}}
+                    {{/if}}
+                    {{#if signup_error_msg}}
+                      <div class="alert alert-danger">{{signup_error_msg}}</div>
+                    {{/if}}
+                    <form method="post" action="/users/register" class="form-horizontal col-lg-11">
+
+                     <div class="col-sm-11 text-center" style="padding-bottom: 15px;">
+				               <p style="color: #407C9A"><em>SIGN UP</em></p>
+                     </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-4">Username:</label>
+
+                              <div class="col-sm-6  col-lg-7 col-lg-offset-1">
+                                <input type="text" class="form-control" placeholder="Enter username" aria-describedby="username" name="username" id="username_tf" required>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="email">Email:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="email" class="form-control" placeholder="Official email" aria-describedby="email" name="email" id="email_tf" required>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="control-label col-sm-4">Password:</label>
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="password" class="form-control" placeholder="Enter password" aria-describedby="password" name="password" id="password_tf" required>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="password2">Confirm Password:</label>
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="password" class="form-control" placeholder="Repeat password" aria-describedby="password2" name="password2" id="confirmpassword_tf" required>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="firstname">First Name:</label>
+                                <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                    <input type="text" class="form-control" placeholder="Enter First Name" aria-describedby="firstname" name="firstname" id="firstname_tf" required />
+                              </div>
+                            </div>
+
+                        <div class="form-group">
+                              <label class="control-label col-sm-4" for="lastname">Last Name:</label>
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-describedby="lastname" name="lastname" id="lastname_tf" required />
+                              </div>
+                            </div>
+
+                        <div class="form-group">
+
+                         <label class="control-label col-sm-4" for="title">Title:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="text" class="form-control" placeholder="Highest degree (eg.PhD,MD)" aria-describedby="title" name="title" id="title_tf" required>
+                              </div>
+                        </div>
+
+                        <div class="form-group">
+                              <label class="control-label col-sm-4" for="affiliation">Affiliation:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="text" class="form-control" placeholder="Enter Organization" aria-describedby="affiliation" name="affiliation" id="affiliation_tf" required>
+                              </div>
+                        </div>
+
+                        <div class="form-group">
+                              <label class="control-label col-sm-4" for="typeofuser">Type of user:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1">
+                                  <div class="btn-group">
+                                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select one<span class="caret"></span></button>
+                                          <ul class="dropdown-menu">
+                                              <li role="presentation"><a href="#">Investigator</a></li>
+                                              <li role="presentation"><a href="#">Researcher</a></li>
+                                          </ul>
+                                    </div>
+                                  <input type="hidden" id="userType" name="userType" />
+                              </div>
+                        </div>
+
+                        <div class="form-group">
+                              <label class="control-label col-sm-4" for="address1">Address 1:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="text" class="form-control" placeholder="Enter first line of address" aria-describedby="address1" name="address1" id="address1_tf" required>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="address2">Address 2:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="text" class="form-control" placeholder="Enter second line of address" aria-describedby="address2" name="address2" id="address2_tf">
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="address3">Address 3:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="text" class="form-control" placeholder="Enter State, Postal Code" aria-describedby="address3" name="address3" id="address3_tf">
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="country">Country:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1">
+                                  <div class="btn-group">
+                                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Country <span class="caret"></span></button>
+                                  <ul class="dropdown-menu scrollable-menu">
+
+                                        <li role="presentation"><a href="#">Afghanistan</a></li>
+                                        <li role="presentation"><a href="#">Albania</a></li>
+                                        <li role="presentation"><a href="#">Algeria</a></li>
+                                        <li role="presentation"><a href="#">American Samoa</a></li>
+                                        <li role="presentation"><a href="#">Andorra</a></li>
+                                        <li role="presentation"><a href="#">Angola</a></li>
+                                        <li role="presentation"><a href="#">Anguilla</a></li>
+                                        <li role="presentation"><a href="#">Antigua &amp; Barbuda</a></li>
+                                        <li role="presentation"><a href="#">Argentina</a></li>
+                                        <li role="presentation"><a href="#">Armenia</a></li>
+                                        <li role="presentation"><a href="#">Aruba</a></li>
+                                        <li role="presentation"><a href="#">Australia</a></li>
+                                        <li role="presentation"><a href="#">Austria</a></li>
+                                        <li role="presentation"><a href="#">Azerbaijan</a></li>
+                                        <li role="presentation"><a href="#">Bahamas</a></li>
+                                        <li role="presentation"><a href="#">Bahrain</a></li>
+                                        <li role="presentation"><a href="#">Bangladesh</a></li>
+                                        <li role="presentation"><a href="#">Barbados</a></li>
+                                        <li role="presentation"><a href="#">Belarus</a></li>
+                                        <li role="presentation"><a href="#">Belgium</a></li>
+                                        <li role="presentation"><a href="#">Belize</a></li>
+                                        <li role="presentation"><a href="#">Benin</a></li>
+                                        <li role="presentation"><a href="#">Bermuda</a></li>
+                                        <li role="presentation"><a href="#">Bhutan</a></li>
+                                        <li role="presentation"><a href="#">Bolivia</a></li>
+                                        <li role="presentation"><a href="#">Bonaire</a></li>
+                                        <li role="presentation"><a href="#">Bosnia &amp; Herzegovina</a></li>
+                                        <li role="presentation"><a href="#">Botswana</a></li>
+                                        <li role="presentation"><a href="#">Brazil</a></li>
+                                        <li role="presentation"><a href="#">British Indian Ocean Ter</a></li>
+                                        <li role="presentation"><a href="#">Brunei</a></li>
+                                        <li role="presentation"><a href="#">Bulgaria</a></li>
+                                        <li role="presentation"><a href="#">Burkina Faso</a></li>
+                                        <li role="presentation"><a href="#">Burundi</a></li>
+                                        <li role="presentation"><a href="#">Cambodia</a></li>
+                                        <li role="presentation"><a href="#">Cameroon</a></li>
+                                        <li role="presentation"><a href="#">Canada</a></li>
+                                        <li role="presentation"><a href="#">Canary Islands</a></li>
+                                        <li role="presentation"><a href="#">Cape Verde</a></li>
+                                        <li role="presentation"><a href="#">Cayman Islands</a></li>
+                                        <li role="presentation"><a href="#">Central African Republic</a></li>
+                                        <li role="presentation"><a href="#">Chad</a></li>
+                                        <li role="presentation"><a href="#">Channel Islands</a></li>
+                                        <li role="presentation"><a href="#">Chile</a></li>
+                                        <li role="presentation"><a href="#">China</a></li>
+                                        <li role="presentation"><a href="#">Christmas Island</a></li>
+                                        <li role="presentation"><a href="#">Cocos Island</a></li>
+                                        <li role="presentation"><a href="#">Colombia</a></li>
+                                        <li role="presentation"><a href="#">Comoros</a></li>
+                                        <li role="presentation"><a href="#">Congo</a></li>
+                                        <li role="presentation"><a href="#">Cook Islands</a></li>
+                                        <li role="presentation"><a href="#">Costa Rica</a></li>
+                                        <li role="presentation"><a href="#">Cote D'Ivoire</a></li>
+                                        <li role="presentation"><a href="#">Croatia</a></li>
+                                        <li role="presentation"><a href="#">Cuba</a></li>
+                                        <li role="presentation"><a href="#">Curacao</a></li>
+                                        <li role="presentation"><a href="#">Cyprus</a></li>
+                                        <li role="presentation"><a href="#">Czech Republic</a></li>
+                                        <li role="presentation"><a href="#">Denmark</a></li>
+                                        <li role="presentation"><a href="#">Djibouti</a></li>
+                                        <li role="presentation"><a href="#">Dominica</a></li>
+                                        <li role="presentation"><a href="#">Dominican Republic</a></li>
+                                        <li role="presentation"><a href="#">East Timor</a></li>
+                                        <li role="presentation"><a href="#">Ecuador</a></li>
+                                        <li role="presentation"><a href="#">Egypt</a></li>
+                                        <li role="presentation"><a href="#">El Salvador</a></li>
+                                        <li role="presentation"><a href="#">Equatorial Guinea</a></li>
+                                        <li role="presentation"><a href="#">Eritrea</a></li>
+                                        <li role="presentation"><a href="#">Estonia</a></li>
+                                        <li role="presentation"><a href="#">Ethiopia</a></li>
+                                        <li role="presentation"><a href="#">Falkland Islands</a></li>
+                                        <li role="presentation"><a href="#">Faroe Islands</a></li>
+                                        <li role="presentation"><a href="#">Fiji</a></li>
+                                        <li role="presentation"><a href="#">Finland</a></li>
+                                        <li role="presentation"><a href="#">France</a></li>
+                                        <li role="presentation"><a href="#">French Guiana</a></li>
+                                        <li role="presentation"><a href="#">French Polynesia</a></li>
+                                        <li role="presentation"><a href="#">French Southern Ter</a></li>
+                                        <li role="presentation"><a href="#">Gabon</a></li>
+                                        <li role="presentation"><a href="#">Gambia</a></li>
+                                        <li role="presentation"><a href="#">Georgia</a></li>
+                                        <li role="presentation"><a href="#">Germany</a></li>
+                                        <li role="presentation"><a href="#">Ghana</a></li>
+                                        <li role="presentation"><a href="#">Gibraltar</a></li>
+                                        <li role="presentation"><a href="#">Great Britain</a></li>
+                                        <li role="presentation"><a href="#">Greece</a></li>
+                                        <li role="presentation"><a href="#">Greenland</a></li>
+                                        <li role="presentation"><a href="#">Grenada</a></li>
+                                        <li role="presentation"><a href="#">Guadeloupe</a></li>
+                                        <li role="presentation"><a href="#">Guam</a></li>
+                                        <li role="presentation"><a href="#">Guatemala</a></li>
+                                        <li role="presentation"><a href="#">Guinea</a></li>
+                                        <li role="presentation"><a href="#">Guyana</a></li>
+                                        <li role="presentation"><a href="#">Haiti</a></li>
+                                        <li role="presentation"><a href="#">Hawaii</a></li>
+                                        <li role="presentation"><a href="#">Honduras</a></li>
+                                        <li role="presentation"><a href="#">Hong Kong</a></li>
+                                        <li role="presentation"><a href="#">Hungary</a></li>
+                                        <li role="presentation"><a href="#">Iceland</a></li>
+                                        <li role="presentation"><a href="#">India</a></li>
+                                        <li role="presentation"><a href="#">Indonesia</a></li>
+                                        <li role="presentation"><a href="#">Iran</a></li>
+                                        <li role="presentation"><a href="#">Iraq</a></li>
+                                        <li role="presentation"><a href="#">Ireland</a></li>
+                                        <li role="presentation"><a href="#">Isle of Man</a></li>
+                                        <li role="presentation"><a href="#">Israel</a></li>
+                                        <li role="presentation"><a href="#">Italy</a></li>
+                                        <li role="presentation"><a href="#">Jamaica</a></li>
+                                        <li role="presentation"><a href="#">Japan</a></li>
+                                        <li role="presentation"><a href="#">Jordan</a></li>
+                                        <li role="presentation"><a href="#">Kazakhstan</a></li>
+                                        <li role="presentation"><a href="#">Kenya</a></li>
+                                        <li role="presentation"><a href="#">Kiribati</a></li>
+                                        <li role="presentation"><a href="#">Korea North</a></li>
+                                        <li role="presentation"><a href="#">Korea South</a></li>
+                                        <li role="presentation"><a href="#">Kuwait</a></li>
+                                        <li role="presentation"><a href="#">Kyrgyzstan</a></li>
+                                        <li role="presentation"><a href="#">Laos</a></li>
+                                        <li role="presentation"><a href="#">Latvia</a></li>
+                                        <li role="presentation"><a href="#">Lebanon</a></li>
+                                        <li role="presentation"><a href="#">Lesotho</a></li>
+                                        <li role="presentation"><a href="#">Liberia</a></li>
+                                        <li role="presentation"><a href="#">Libya</a></li>
+                                        <li role="presentation"><a href="#">Liechtenstein</a></li>
+                                        <li role="presentation"><a href="#">Lithuania</a></li>
+                                        <li role="presentation"><a href="#">Luxembourg</a></li>
+                                        <li role="presentation"><a href="#">Macau</a></li>
+                                        <li role="presentation"><a href="#">Macedonia</a></li>
+                                        <li role="presentation"><a href="#">Madagascar</a></li>
+                                        <li role="presentation"><a href="#">Malaysia</a></li>
+                                        <li role="presentation"><a href="#">Malawi</a></li>
+                                        <li role="presentation"><a href="#">Maldives</a></li>
+                                        <li role="presentation"><a href="#">Mali</a></li>
+                                        <li role="presentation"><a href="#">Malta</a></li>
+                                        <li role="presentation"><a href="#">Marshall Islands</a></li>
+                                        <li role="presentation"><a href="#">Martinique</a></li>
+                                        <li role="presentation"><a href="#">Mauritania</a></li>
+                                        <li role="presentation"><a href="#">Mauritius</a></li>
+                                        <li role="presentation"><a href="#">Mayotte</a></li>
+                                        <li role="presentation"><a href="#">Mexico</a></li>
+                                        <li role="presentation"><a href="#">Midway Islands</a></li>
+                                        <li role="presentation"><a href="#">Moldova</a></li>
+                                        <li role="presentation"><a href="#">Monaco</a></li>
+                                        <li role="presentation"><a href="#">Mongolia</a></li>
+                                        <li role="presentation"><a href="#">Montserrat</a></li>
+                                        <li role="presentation"><a href="#">Morocco</a></li>
+                                        <li role="presentation"><a href="#">Mozambique</a></li>
+                                        <li role="presentation"><a href="#">Myanmar</a></li>
+                                        <li role="presentation"><a href="#">Nambia</a></li>
+                                        <li role="presentation"><a href="#">Nauru</a></li>
+                                        <li role="presentation"><a href="#">Nepal</a></li>
+                                        <li role="presentation"><a href="#">Netherland Antilles</a></li>
+                                        <li role="presentation"><a href="#">Netherlands (Holland, Europe)</a></li>
+                                        <li role="presentation"><a href="#">Nevis</a></li>
+                                        <li role="presentation"><a href="#">New Caledonia</a></li>
+                                        <li role="presentation"><a href="#">New Zealand</a></li>
+                                        <li role="presentation"><a href="#">Nicaragua</a></li>
+                                        <li role="presentation"><a href="#">Niger</a></li>
+                                        <li role="presentation"><a href="#">Nigeria</a></li>
+                                        <li role="presentation"><a href="#">Niue</a></li>
+                                        <li role="presentation"><a href="#">Norfolk Island</a></li>
+                                        <li role="presentation"><a href="#">Norway</a></li>
+                                        <li role="presentation"><a href="#">Oman</a></li>
+                                        <li role="presentation"><a href="#">Pakistan</a></li>
+                                        <li role="presentation"><a href="#">Palau Island</a></li>
+                                        <li role="presentation"><a href="#">Palestine</a></li>
+                                        <li role="presentation"><a href="#">Panama</a></li>
+                                        <li role="presentation"><a href="#">Papua New Guinea</a></li>
+                                        <li role="presentation"><a href="#">Paraguay</a></li>
+                                        <li role="presentation"><a href="#">Peru</a></li>
+                                        <li role="presentation"><a href="#">Philippines</a></li>
+                                        <li role="presentation"><a href="#">Pitcairn Island</a></li>
+                                        <li role="presentation"><a href="#">Poland</a></li>
+                                        <li role="presentation"><a href="#">Portugal</a></li>
+                                        <li role="presentation"><a href="#">Puerto Rico</a></li>
+                                        <li role="presentation"><a href="#">Qatar</a></li>
+                                        <li role="presentation"><a href="#">Republic of Montenegro</a></li>
+                                        <li role="presentation"><a href="#">Republic of Serbia</a></li>
+                                        <li role="presentation"><a href="#">Reunion</a></li>
+                                        <li role="presentation"><a href="#">Romania</a></li>
+                                        <li role="presentation"><a href="#">Russia</a></li>
+                                        <li role="presentation"><a href="#">Rwanda</a></li>
+                                        <li role="presentation"><a href="#">St Barthelemy</a></li>
+                                        <li role="presentation"><a href="#">St Eustatius</a></li>
+                                        <li role="presentation"><a href="#">St Helena</a></li>
+                                        <li role="presentation"><a href="#">St Kitts-Nevis</a></li>
+                                        <li role="presentation"><a href="#">St Lucia</a></li>
+                                        <li role="presentation"><a href="#">St Maarten</a></li>
+                                        <li role="presentation"><a href="#">St Pierre &amp; Miquelon</a></li>
+                                        <li role="presentation"><a href="#">St Vincent &amp; Grenadines</a></li>
+                                        <li role="presentation"><a href="#">Saipan</a></li>
+                                        <li role="presentation"><a href="#">Samoa</a></li>
+                                        <li role="presentation"><a href="#">Samoa American</a></li>
+                                        <li role="presentation"><a href="#">San Marino</a></li>
+                                        <li role="presentation"><a href="#">Sao Tome &amp; Principe</a></li>
+                                        <li role="presentation"><a href="#">Saudi Arabia</a></li>
+                                        <li role="presentation"><a href="#">Senegal</a></li>
+                                        <li role="presentation"><a href="#">Serbia</a></li>
+                                        <li role="presentation"><a href="#">Seychelles</a></li>
+                                        <li role="presentation"><a href="#">Sierra Leone</a></li>
+                                        <li role="presentation"><a href="#">Singapore</a></li>
+                                        <li role="presentation"><a href="#">Slovakia</a></li>
+                                        <li role="presentation"><a href="#">Slovenia</a></li>
+                                        <li role="presentation"><a href="#">Solomon Islands</a></li>
+                                        <li role="presentation"><a href="#">Somalia</a></li>
+                                        <li role="presentation"><a href="#">South Africa</a></li>
+                                        <li role="presentation"><a href="#">Spain</a></li>
+                                        <li role="presentation"><a href="#">Sri Lanka</a></li>
+                                        <li role="presentation"><a href="#">Sudan</a></li>
+                                        <li role="presentation"><a href="#">Suriname</a></li>
+                                        <li role="presentation"><a href="#">Swaziland</a></li>
+                                        <li role="presentation"><a href="#">Sweden</a></li>
+                                        <li role="presentation"><a href="#">Switzerland</a></li>
+                                        <li role="presentation"><a href="#">Syria</a></li>
+                                        <li role="presentation"><a href="#">Tahiti</a></li>
+                                        <li role="presentation"><a href="#">Taiwan</a></li>
+                                        <li role="presentation"><a href="#">Tajikistan</a></li>
+                                        <li role="presentation"><a href="#">Tanzania</a></li>
+                                        <li role="presentation"><a href="#">Thailand</a></li>
+                                        <li role="presentation"><a href="#">Togo</a></li>
+                                        <li role="presentation"><a href="#">Tokelau</a></li>
+                                        <li role="presentation"><a href="#">Tonga</a></li>
+                                        <li role="presentation"><a href="#">Trinidad &amp; Tobago</a></li>
+                                        <li role="presentation"><a href="#">Tunisia</a></li>
+                                        <li role="presentation"><a href="#">Turkey</a></li>
+                                        <li role="presentation"><a href="#">Turkmenistan</a></li>
+                                        <li role="presentation"><a href="#">Turks &amp; Caicos Is</a></li>
+                                        <li role="presentation"><a href="#">Tuvalu</a></li>
+                                        <li role="presentation"><a href="#">Uganda</a></li>
+                                        <li role="presentation"><a href="#">Ukraine</a></li>
+                                        <li role="presentation"><a href="#">United Arab Emirates</a></li>
+                                        <li role="presentation"><a href="#">United Kingdom</a></li>
+                                        <li role="presentation"><a href="#">United States of America</a></li>
+                                        <li role="presentation"><a href="#">Uruguay</a></li>
+                                        <li role="presentation"><a href="#">Uzbekistan</a></li>
+                                        <li role="presentation"><a href="#">Vanuatu</a></li>
+                                        <li role="presentation"><a href="#">Vatican City State</a></li>
+                                        <li role="presentation"><a href="#">Venezuela</a></li>
+                                        <li role="presentation"><a href="#">Vietnam</a></li>
+                                        <li role="presentation"><a href="#">Virgin Islands (Brit)</a></li>
+                                        <li role="presentation"><a href="#">Virgin Islands (USA)</a></li>
+                                        <li role="presentation"><a href="#">Wake Island</a></li>
+                                        <li role="presentation"><a href="#">Wallis &amp; Futana Is</a></li>
+                                        <li role="presentation"><a href="#">Yemen</a></li>
+                                        <li role="presentation"><a href="#">Zaire</a></li>
+                                        <li role="presentation"><a href="#">Zambia</a></li>
+                                        <li role="presentation"><a href="#">Zimbabwe</a></li>
+
+                                  </ul>
+                                </div>
+                                  <input type="hidden" id="country" name="country" />
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="bio">Link to Bio:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="text" class="form-control" placeholder="http://www.example.com" aria-describedby="bio" name="bio" id="bio_tf">
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="control-label col-sm-4" for="researchinterest">Research Interests:</label>
+
+                              <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                                <input type="text" class="form-control" placeholder="Area1, Area2,..." aria-describedby="researchinterest" name="researchinterest" id="researchinterest_tf">
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="col-sm-offset-1 col-sm-4 col-lg-offset-4">
+                          <button type="submit" class="btn btn-info">Register!</button>
+                        </div>
+                      </div>
+                </form>
+                  </div>
+                </div>
+                <div class="col-lg-1">
+                  <p><em>or</em></p>
+                </div>
+                <div class="col-lg-4">
+                  <div>
+
+                  {{#if success_msg}}
+                    <div class="alert alert-success">{{success_msg}}</div>
+                    {{/if}}
+
+                    {{#if error_msg}}
+                      <div class="alert alert-danger">{{error_msg}}</div>
+                    {{/if}}
+
+                    {{#if error}}
+                      <div class="alert alert-danger">{{error}}</div>
+                    {{/if}}
+                    <form method="post" action="/users/login" class="form-horizontal">
+                     <div class="col-sm-7 text-center" style="padding-bottom: 15px;">
+				   <p style="color: #407C9A"><em>SIGN IN</em></p>
+
+                     </div>
+                      <div class="form-group">
+                        <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                          <input type="text" class="form-control" name="username" placeholder="Enter username/email" required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+
+                        <div class="col-sm-6 col-lg-offset-1 col-lg-7">
+                          <input type="password" class="form-control" name="password" placeholder="Enter password" required>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-4 col-lg-offset-3">
+                          <button type="submit" class="btn btn-info">Login</button>
+                        </div>
+                      </div>
+                    </form>
+                    <a href="https://informvtb.herokuapp.com/users/forgot">Forgot password</a>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+<script>
+$(".dropdown-menu li a").click(function(event){
+  var selText = $(this).text();
+  $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+    $(this).parents('.btn-group').siblings("input").val(selText);
+    event.preventDefault();
+});
+</script>

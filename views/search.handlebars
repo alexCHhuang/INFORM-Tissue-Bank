@@ -1,0 +1,219 @@
+<script src="../js/editSample.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-select.min.css">
+<script src="../js/bootstrap-select.min.js"></script>
+
+<div class = "box">
+<div class="container">
+    
+      <button id="btnSearchGroup" type="button" data-toggle="collapse" data-target="#searchGroup" class="col-sm-offset-4 btn btn-lg btn-link"><b>Click Here for Advanced Search</b></button>
+    <br/>
+
+<form method="post" action="/sample/advancedSearchSample">
+  <div class="collapse filter-panel" id=searchGroup>
+    
+        <div class="form-group row">
+          <label for="inputDiagnosis" class="col-sm-1 col-sm-offset-3 col-form-label">Diagnosis</label>
+          <div class="col-sm-4">
+           <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select one<span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li role="presentation"><a href="#">CTD: Carnitine transporter defect</a></li>
+            <li role="presentation"><a href="#">CPT1: Carnitine palmitoyltransferase defect</a></li>
+            <li role="presentation"><a href="#">CACT: Carnitine acylcarnitine trasferase defect</a></li>
+            <li role="presentation"><a href="#">VLCAD: Very long chain acyl-CoA dehydrogenase deficiency</a></li>
+            <li role="presentation"><a href="#">MCAD: Medium chain acyl-CoA dehydrogenase deficiency</a></li>
+            <li role="presentation"><a href="#">SCAD: Short chain acyl-CoA dehydrogenase deficiency</a></li>
+            <li role="presentation"><a href="#">ACAD: Acyl-CoA dehydrogenase 9 deficiency</a></li>
+            <li role="presentation"><a href="#">LCHAD: Long chain 3-hydroxyacyl-CoA dehydrogenase deficiency, isolated</a></li>
+            <li role="presentation"><a href="#">MTP: Mitochondrial trifunctional protein deficiency</a></li>
+            <li role="presentation"><a href="#">MCHAD: Medium chain 3-hydroxyacyl-CoA dehydrogenase deficiency</a></li>
+            <li role="presentation"><a href="#">SCHAD: Short chain 3-hydroxyacyl-CoA dehydrogenase deficiency</a></li>
+            <li role="presentation"><a href="#">MKAT: Medium chain 3-ketoacyl-CoA thiolase</a></li>
+            <li role="presentation"><a href="#">ETF: Electron transfer flavoprotein deficiency</a></li>
+            <li role="presentation"><a href="#">ETFDH: Electron flavoprotein dehydrogenase deficiency</a></li>
+          </ul>
+        </div>
+              <input type="hidden" id="search_diagnosis" name="search_diagnosis" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputPhenotype" class="col-sm-1 col-sm-offset-3 col-form-label">Phenotype</label>
+          <div class="col-sm-4">
+				<select id="phenotypeMultiple" class="selectpicker form-control" name="search_phenotype"  style="width:auto" multiple >
+                     <option value="Hypoglycemia">Hypoglycemia</option>
+                     <option value="Rhabdomyolysis">Rhabdomyolysis</option>
+                     <option value="Cardiomyopathy">Cardiomyopathy</option>
+                     <option value="Cardiac arrhythmia">Cardiac arrhythmia</option>
+                     <option value="Skeletal Myopathy">Skeletal Myopathy</option>
+                     <option value="Hyperammonemia">Hyperammonemia</option>
+                     <option value="Peripheral neuropathy">Peripheral neuropathy</option>
+                     <option value="Retinopathy">Retinopathy</option>
+				</select>
+        </div>
+			</div>
+        <div class="form-group row">
+          <label for="search_investigator" class="col-sm-1 col-sm-offset-3 col-form-label">Investigator</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="search_investigator" placeholder="Investigator's username" name="search_investigator" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="inputType" class="col-sm-1 col-sm-offset-3 col-form-label">Sample Type</label>
+          <div class="col-sm-6">
+            <div class="btn-group">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select one<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li role="presentation"><a href="#">Blood</a></li>
+                    <li role="presentation"><a href="#">Cell</a></li>
+                    <li role="presentation"><a href="#">Tissue</a></li>
+                    <li role="presentation"><a href="#">Urine</a></li>
+                  </ul>
+                </div>
+              <input type="hidden" id="search_type" name="search_type" />
+          </div>
+        </div>
+      
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="submit"></label>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Search for sample</button>
+          </div>
+        </div>
+    </div>
+      
+      </form>
+    
+    <br/>
+    <br/>
+    <br/>
+    <div style="padding: 10px; ">
+        <div class="text-center">
+            <h2 class="brand-before">
+                    Search among Sample Information
+                </h2>
+        </div>
+        <br>
+        <table id="searchResults_table" data-search="true" data-show-columns="true" data-pagination="true" data-height="580">
+            <thead>
+                <tr>
+                   <th data-field="_id" data-sortable="true" width="100">Sample ID</th>
+                   <th data-field="sampleType" data-sortable="true">Sample Type</th>
+                    <th data-field="user" data-sortable="true">Investigator</th>
+                    <th data-field="diagnosis" data-sortable="true">Diagnosis</th>
+                    <th data-field="Allele1" data-sortable="true">Allele1</th>
+                    <th data-field="Allele2" data-sortable="true">Allele2</th>
+                   <!--<th data-field="proteinCode" data-sortable="true">Protein Code</th>
+                    <th data-field="DNACode" data-sortable="true">DNA Code</th>-->
+                    <th data-field="phenotypeMultiple" data-sortable="true">Phenotype</th>
+                   <!-- <th data-field="subjectID" data-sortable="true">Subject ID</th>-->
+                    <!--<th data-field="action" data-sortable="true">Action</th>-->
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+</div>
+
+  
+
+<!--
+<div class="container" id=requesttable style="display: none">
+    <div class="row col-md-10 col-md-offset-1 custyle">
+    <table class="table table-striped custab">
+    <thead>
+        <tr>
+            <th>Sample ID</th>
+            <th>Investigator</th>
+            <th>Diagnosis</th>
+            <th>Genotype</th>
+            <th>Sample Type</th>
+            <th class="text-center">Action</th>
+        </tr>
+    </thead>
+            <tr>
+                <td>3456</td>
+                <td>Merchant of Venice</td>
+                <td>Defetct1</td>
+                <td>CEG>4F,DAERF</td>
+                <td>Cell</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-envelope"></span> Request</a></td>
+            </tr>
+            <tr>
+                <td>23563</td>
+                <td>Solan Vineyards</td>
+                <td>Defetct2</td>
+                <td>PEG>4F,DA4RF</td>
+                <td>Tissue</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-envelope"></span> Request</a></td>
+            </tr>
+            <tr>
+                <td>23345</td>
+                <td>Blood Bank</td>
+                <td>Defetct4</td>
+                <td>REG>4F,DA2F</td>
+                <td>Blood</td>
+                <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-envelope"></span> Request</a></td>
+            </tr>
+    </table>
+    </div>
+</div>-->
+
+<!--<div class="box container" id="searchResults_table" style="display: none">
+    <div style="padding: 10px; ">
+        <br>
+        <table id="searchResults_table" data-search="true" data-show-columns="true" data-pagination="true" data-height="580">
+            <thead>
+                <tr>
+                   <th data-field="_id" data-sortable="true" width="200">Sample ID</th>
+                    <th data-field="user" data-sortable="true">Investigator</th>
+                    <th data-field="diagnosis" data-sortable="true">Diagnosis</th>
+                    <th data-field="Allele1" data-sortable="true">Allele1</th>
+                    <th data-field="Allele2" data-sortable="true">Allele2</th>
+                   <th data-field="proteinCode" data-sortable="true">Protein Code</th>
+                    <th data-field="proteinCode2" data-sortable="true">Protein Code 2</th>
+                    <th data-field="subjectID" data-sortable="true">Subject ID</th>-->
+                    <!--<th data-field="action" data-sortable="true">Action</th>-->
+               <!-- </tr>
+            </thead>
+        </table>
+    </div>
+</div>-->
+
+<script>
+var data = "{{sampleData}}";
+if (data.length > 0) {
+    data = data.replace(/&quot;/g,'"');
+    data = JSON.parse(data);    
+    console.log(data);
+    
+    for(var key in data) {
+        data[key]._id="<p><a href=\"sampleDetails?id="+data[key]._id+"\">"+data[key]._id+"</a></p>";
+}
+}
+
+$( "#submit" ).click(function() {
+  $( "#requesttable" ).toggle();
+});
+    
+$(".dropdown-menu li a").click(function(event){
+    var selText = $(this).text();
+    $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+    $(this).parents('.btn-group').siblings("input").val(selText);
+    event.preventDefault();
+});
+</script>
+<style>
+.custab{
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 5% 0;
+    box-shadow: 3px 3px 2px #ccc;
+    transition: 0.5s;
+    }
+.custab:hover{
+    box-shadow: 3px 3px 0px transparent;
+    transition: 0.5s;
+    }
+</style>
+<script src="../js/searchResults.js"></script>
